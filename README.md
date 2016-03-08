@@ -1,7 +1,7 @@
 # GYWy
 用icarousel实现网易新闻标题跳转
 ====================
-A Second Level Header
+
 ---------------------
 
 Now is the time for all good men to come to
