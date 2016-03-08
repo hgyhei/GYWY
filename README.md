@@ -6,13 +6,14 @@
 
 ![Alt text](/http://ww3.sinaimg.cn/bmiddle/bcd340f3gw1f1p7ytjb9oj208c198juw.jpg/to/img.jpg)
 
-![Alt text](/http://ww3.sinaimg.cn/bmiddle/bcd340f3gw1f1p7ytjb9oj208c198juw.jpg/to/img.jpg)
-dog's back.
-### Header 3
 
-> This is a blockquote.
+
+
 > 
-> This is the second paragraph in the blockquote.
+> 
+>  GYNewsCarouselView *carousel = [[GYNewsCarouselView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    carousel.titleList = self.titleList;
+    [self.view addSubview:carousel];
 >
-> ## This is an H2 in a blockquote
+> 
 
