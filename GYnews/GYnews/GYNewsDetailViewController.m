@@ -8,7 +8,7 @@
 
 #import "GYNewsDetailViewController.h"
 #import "GYNewsCellModel.h"
-@interface GYNewsDetailViewController ()
+@interface GYNewsDetailViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -17,30 +17,29 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
- [self.navigationController.navigationBar setHidden:YES];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIWebView* webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    webView.delegate = self;
+    webView.scalesPageToFit = YES;
     [self.view addSubview:webView];
-    NSURL* url = [NSURL URLWithString:self.newsmodel.url];//创建URL
+    NSURL* url = [NSURL URLWithString:self.newsmodel.url];
+    NSLog(@"%@",url);//创建URL
     NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
     [webView loadRequest:request];//加载
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+NSMutableString *js = [NSMutableString string];
+    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML;"];
+    NSLog(@"%@", html);
+    [js appendString:@"var top = document.getElementsByClassName('topbar)"];
+    [js appendString:@"top.parentNode.removeChild(top);"];
+        [webView stringByEvaluatingJavaScriptFromString:js];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end

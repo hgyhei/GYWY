@@ -17,7 +17,6 @@
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 #import "GYNewsCellModel.h"
-#import "MJExtension.h"
 #import "XYString.h"
 #import "UIView+Extension.h"
 #import "UIColor+RGBA.h"
@@ -35,7 +34,7 @@
 #import "GYTitleArrayManager.h"
 #import "GYNewsCarouselView.h"
 @interface GYNewsCarouselView ()<iCarouselDelegate,
-iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
+iCarouselDataSource>
 
 @property (nonatomic,strong) NSMutableArray *titleArray;
 @property (nonatomic,strong) NSMutableArray *tempListArray;
@@ -72,7 +71,7 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
     if (!_sortItemView) {
     
         _sortItemView = [[GYSortItemView alloc]init];
-         _sortItemView.delegate = self;
+       
     }
     return _sortItemView;
 }
@@ -81,7 +80,7 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
     if (!_segmentView) {
         _segmentView = [[GYSegmentView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButton, GYSegmentHeight)];
         _segmentView.backgroundColor = [UIColor whiteColor];
-        _segmentView.delegate = self;
+     
     }
     return _segmentView;
 }
@@ -191,6 +190,13 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
 {
     
     [self addSubview:self.segmentView];
+    __weak typeof(self) weakSelf = self;
+    self.segmentView.titlebtnClickBlock = ^(UIButton *btn){
+        
+        NSInteger index = [weakSelf.segmentView.titleArray indexOfObject:btn.titleLabel.text];
+        [weakSelf.carousel scrollToItemAtIndex:index animated:NO];
+        [weakSelf titleBtnChange:btn];
+    };
     UIButton *btn = self.segmentView.titleButtonArray[0];
     [self titleBtnChange: btn];
 }
@@ -259,10 +265,17 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
     else{
     
         GYSortItemView *sortItemView = [[GYSortItemView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButton, GYSegmentHeight)];
-        sortItemView.delegate = self;
+     
         self.sortItemView = sortItemView;
         self.sortItemView.currentItemsArray = self.titleArray;
         self.sortItemView.itemView.height = self.height;
+        __weak typeof(self) WeakSelf = self;
+        self.sortItemView.itemClickBlock = ^(UIButton *btn)
+        {
+            [WeakSelf itemViewButtonClick:btn];
+        
+        
+        };
         
         [self addSubview:self.sortItemView];
         [self addSubview:self.sortItemView.itemView];
@@ -297,6 +310,7 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
+    [view removeFromSuperview];
     view = nil;
     
     
@@ -379,18 +393,6 @@ iCarouselDataSource,GYSegmentDelegate,GYSortItemViewDelegate>
     }
 }
 
-
-
-#pragma mark - sortitemview segmentview的代理方法
-- (void)segmentTitleButtonClick:(UIButton *)btn
-{
-    NSInteger index = [self.segmentView.titleArray indexOfObject:btn.titleLabel.text];
-    [self.carousel scrollToItemAtIndex:index animated:NO];
-    
-    [self titleBtnChange:btn];
-    
-    
-}
 - (void)itemViewButtonClick:(UIButton *)btn;
 {
    

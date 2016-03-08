@@ -9,6 +9,8 @@
 #import "GYNewsTableView.h"
 #import "MJRefresh.h"
 #import "XYString.h"
+#import "UIImage+GIF.h"
+#import "UIView+Extension.h"
 #import "AFNetworking.h"
 #import "GYNewsCellModel.h"
 #import "MJExtension.h"
@@ -35,22 +37,45 @@
         self.dataSource = self;
          self.separatorColor = [UIColor clearColor];
         //..下拉刷新
-        self.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            
-            myRefreshView = self.header;
-  
-            [self loadData];
-        }];
-        // 马上进入刷新状态
-        [self.header beginRefreshing];
+//        self.mj_header = [MJRefreshStateHeader headerWithRefreshingBlock:^{
+//            
+//            myRefreshView = self.mj_header;
+//            myRefreshView.automaticallyChangeAlpha = YES;
+//            [self loadData];
+//        }];
+        MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         
+        // 设置文字
+        [header setTitle:@"刚刚刷新" forState:MJRefreshStateIdle];
+        [header setTitle:@"刚刚刷新" forState:MJRefreshStatePulling];
+        [header setTitle:@"正在刷新" forState:MJRefreshStateRefreshing];
+        header.lastUpdatedTimeLabel.hidden = YES;
+        // 设置字体
+        header.stateLabel.font = [UIFont systemFontOfSize:10];
+        // 设置颜色
+        header.stateLabel.textColor = [UIColor grayColor];
+//        
+//        UIImage *gif = [UIImage sd_animatedGIFNamed:@"circle"];
+//        NSArray *imgs = [[NSArray alloc]init];
+//        imgs = @[gif];
+//        //设置GIF状态 要设置位置再点进去改
+//        [header setImages:imgs forState:MJRefreshStateIdle];
+//        [header setImages:imgs forState:MJRefreshStatePulling];
+        
+        
+        // 马上进入刷新状态
+        [header beginRefreshing];
+        
+        // 设置刷新控件
+        self.mj_header = header;
+        myRefreshView = self.mj_header;
         //..上拉刷新
-        self.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             page = page + 10;
-            myRefreshView = self.footer;
+            myRefreshView = self.mj_footer;
             [self loadData];
         }];
-        self.footer.hidden = YES;
+        self.mj_footer.hidden = YES;
         
         
     }
@@ -59,6 +84,7 @@
     
 
 }
+
 - (void)setTitle:(NSString *)title
 {
     _title = title;
@@ -79,11 +105,11 @@
         // 数组>>model数组
         NSMutableArray *arrayM = [NSMutableArray arrayWithArray:[GYNewsCellModel mj_objectArrayWithKeyValuesArray:temArray]];
         
-        if (myRefreshView == self.header) {
+        if (myRefreshView == self.mj_header) {
             self.listArry = arrayM;
-            self.footer.hidden = self.listArry.count==0?YES:NO;
+            self.mj_footer.hidden = self.listArry.count==0?YES:NO;
             
-        }else if(myRefreshView == self.footer){
+        }else if(myRefreshView == self.mj_footer){
             [self.listArry addObjectsFromArray:arrayM];
         }
         

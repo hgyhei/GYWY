@@ -376,8 +376,8 @@
         return;
     }
     NSLog(@"itemClick");
-    if ([self.delegate respondsToSelector:@selector(itemViewButtonClick:)]) {
-        [self.delegate itemViewButtonClick:btn];
+    if (self.itemClickBlock) {
+        self.itemClickBlock(btn);
     }
 
 }

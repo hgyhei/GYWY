@@ -121,9 +121,8 @@
 #pragma mark -按钮点击
 - (void)titleClick:(UIButton *)btn
 {
-    if ([self.delegate respondsToSelector:@selector(segmentTitleButtonClick:)])
-    {
-        [self.delegate segmentTitleButtonClick:btn];
+    if (self.titlebtnClickBlock) {
+        self.titlebtnClickBlock(btn);
     }
 }
 

@@ -8,13 +8,7 @@
 #define GYTitleButtonMaxFont 20
 #define GYTitleButtonMinFont 15
 #import <UIKit/UIKit.h>
-/**
- *  代理
- */
-@protocol GYSegmentDelegate <NSObject>
-@optional
-- (void)segmentTitleButtonClick:(UIButton *)btn;
-@end
+typedef void (^TitlebtnClickBlock)(UIButton *btn);
 @interface GYSegmentView : UIView
 /**
  *  标题数组
@@ -32,9 +26,6 @@
  *  滚动条
  */
 @property (nonatomic,strong) UIScrollView *titleScroll;
-/**
- *  代理
- */
-@property (nonatomic,weak) id <GYSegmentDelegate> delegate;
 
+@property (nonatomic, copy) TitlebtnClickBlock titlebtnClickBlock ;
 @end

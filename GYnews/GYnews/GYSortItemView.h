@@ -12,16 +12,13 @@
 #define maxCols 4
 #define GYaddButton 40
 #import <UIKit/UIKit.h>
+typedef void (^ItemClickBlock)(UIButton *btn);
 
-@protocol GYSortItemViewDelegate <NSObject>
-@optional
-- (void)itemViewButtonClick:(UIButton *)btn;
-@end
 @interface GYSortItemView : UIView
 
 @property (nonatomic,strong) NSMutableArray *currentItemsArray;
 @property (nonatomic,weak) UIScrollView *itemView;
 @property (nonatomic,weak) UIButton *sortAndCut;
-@property (nonatomic,weak) id <GYSortItemViewDelegate> delegate;
 
+@property (nonatomic,copy) ItemClickBlock itemClickBlock;
 @end
