@@ -5,7 +5,7 @@
 //  Created by hgy on 16/2/25.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define tablecellClick        @"tablecellClick"
+
 #define GYaddButton 40
 #define GYSegmentScrollMargin 30
 #define GYSegmentHeight 44
@@ -15,6 +15,7 @@
 #import "GYNewsViewController.h"
 #import "UIView+Extension.h"
 #import "GYNewsTableView.h"
+#import "Constants.h"
 #import "GYNewsCarouselView.h"
 #import "GYNewsDetailViewController.h"
 @interface GYNewsViewController()
@@ -53,7 +54,7 @@
 }
 
 - (void)initNotificationCenter{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableviewClick:) name:tablecellClick object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableviewClick:) name:GYNewsTablecellClickNotification object:nil];
    }
 - (void)tableviewClick:(NSNotification *)noti
 {

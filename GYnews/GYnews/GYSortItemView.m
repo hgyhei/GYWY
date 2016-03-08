@@ -5,13 +5,12 @@
 //  Created by hgy on 16/2/28.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define deletItemW                             15
-#define titleArrayChange        @"titleArrayChange"
-#define cutTitleArray       @"cutTitleArray"
+
 #import "GYSortItemView.h"
 #import "UIView+Extension.h"
 #import "GYSortButton.h"
 #import "GYTitleArrayManager.h"
+#import "Constants.h"
 @interface GYSortItemView()
 @property (nonatomic, strong) NSMutableArray *positionViews;
 @property (nonatomic, strong) NSMutableDictionary *itemsDic;
@@ -74,10 +73,10 @@
 - (void)setCurrentItem
 {
     NSUInteger count = self.currentItemsArray.count ;
-    CGFloat rows = (count + maxCols - 1) / maxCols;
+    CGFloat rows = (count + GYsortItemViewmaxCols - 1) / GYsortItemViewmaxCols;
     CGFloat currentItemViewHeight = rows * (GYItemViewMargin + GYItemHeight);
     
-    UIScrollView *itemview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.height, self.width + GYaddButton, currentItemViewHeight)];
+    UIScrollView *itemview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, self.height, self.width + GYaddButtonWidth, currentItemViewHeight)];
     itemview.backgroundColor = [UIColor whiteColor];
     itemview.alpha = 1;
     itemview.contentSize = CGSizeMake(0, 1000);
@@ -277,11 +276,11 @@
 //通知 按钮排序变化发送 carousel view的数据源数组顺序改变
 - (void)creatNotification:(NSUInteger)n1 :(NSUInteger)n2
 {
-    NSNumber *num1 = [NSNumber numberWithInteger:n1];
-    NSNumber *num2 = [NSNumber numberWithInteger:n2];
+    NSNumber *num1 = @(n1);
+    NSNumber *num2 = @(n2);
     NSArray *arry = @[num1,num2];
     //创建通知
-    NSNotification *notification =[NSNotification notificationWithName:titleArrayChange object:arry userInfo:nil];
+    NSNotification *notification =[NSNotification notificationWithName:GYSortitemViewTitleArrayChangeNotification object:arry userInfo:nil];
     //通过通知中心发送通知
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
@@ -298,13 +297,13 @@
     NSUInteger count = self.currentItemsArray.count;
     CGFloat buttonW = GYItemWitdh;
     CGFloat buttonH = GYItemHeight;
-    CGFloat margin = (self.itemView.width - maxCols * GYItemWitdh)/ (1 + maxCols);
+    CGFloat margin = (self.itemView.width - GYsortItemViewmaxCols * GYItemWitdh)/ (1 + GYsortItemViewmaxCols);
     CGFloat buttonY = GYItemViewMargin;
-    CGFloat rows = (count + maxCols - 1) / maxCols;
+    CGFloat rows = (count + GYsortItemViewmaxCols - 1) / GYsortItemViewmaxCols;
     for (int i = 0; i < rows; i++) {
         CGFloat buttonX = margin;
-        for (int j = 0; j < maxCols; j ++) {
-            NSUInteger index = j + i* maxCols;
+        for (int j = 0; j < GYsortItemViewmaxCols; j ++) {
+            NSUInteger index = j + i* GYsortItemViewmaxCols;
 #warning 控制按钮数量等于数组的数量
             if (index == count)
                 break;
@@ -361,9 +360,9 @@
         
         NSUInteger index = [self.currentItemsArray indexOfObject:sort.titleLabel.text];
             NSLog(@"%ld",index);
-        NSNumber *num = [NSNumber numberWithInteger:index];
+        NSNumber *num = @(index);
         //创建通知
-        NSNotification *notification =[NSNotification notificationWithName:cutTitleArray object:num];
+        NSNotification *notification =[NSNotification notificationWithName:GYSortitemViewcutTitleArrayNotification object:num];
         //通过通知中心发送通知
         [[NSNotificationCenter defaultCenter] postNotification:notification];
          [self layoutItemsAfterDeletItem:sort];

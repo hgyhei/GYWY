@@ -55,6 +55,6 @@
 // 数据模型
 @property(nonatomic ,strong) GYNewsCellModel * newsModel;
 
-+(NSString *)cellIdentifierForRow:(GYNewsCellModel *)newsModel;
++ (NSString *)cellIdentifierForRow:(GYNewsCellModel *)newsModel;
 
 @end

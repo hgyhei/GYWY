@@ -5,15 +5,11 @@
 //  Created by hgy on 16/2/29.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define GYaddButton 40
-#define GYSegmentScrollMargin 30
-#define GYSegmentHeight 44
-#define GYSegmentMargin 10
+
 #define GYTitleSelecterColor [UIColor redColor]
 #define GYTitleNormalColor [UIColor blackColor]
-#define titleArrayChange        @"titleArrayChange"
-#define cutTitleArray       @"cutTitleArray"
 
+#import "Constants.h"
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 #import "GYNewsCellModel.h"
@@ -78,7 +74,7 @@ iCarouselDataSource>
 - (GYSegmentView *)segmentView
 {
     if (!_segmentView) {
-        _segmentView = [[GYSegmentView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButton, GYSegmentHeight)];
+        _segmentView = [[GYSegmentView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButtonWidth, GYSegmentViewHeight)];
         _segmentView.backgroundColor = [UIColor whiteColor];
      
     }
@@ -140,8 +136,8 @@ iCarouselDataSource>
     return self;
 }
 - (void)initNotificationCenter{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tempListChange:) name:titleArrayChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cutTempList:) name:cutTitleArray object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tempListChange:) name:GYSortitemViewTitleArrayChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cutTempList:) name:GYSortitemViewcutTitleArrayNotification object:nil];
 }
 - (void)tempListChange:(NSNotification *)noti
 {
@@ -202,7 +198,7 @@ iCarouselDataSource>
 }
 - (void)setupAddButton
 {
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.segmentView.width, 70, GYaddButton, GYSegmentHeight)];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.segmentView.width, 70, GYaddButtonWidth, GYSegmentViewHeight)];
     [btn setImage:[UIImage imageNamed:@"iconfont-iosplusempty"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(addBtnclick:) forControlEvents:UIControlEventTouchUpInside];
     self.addbtn = btn;
@@ -258,27 +254,28 @@ iCarouselDataSource>
 - (void)addSortItemView
 
 {
-    if (self.sortItemView && (self.sortItemView.alpha == 0)) {
+    BOOL isExistSotrItemView = self.sortItemView && (self.sortItemView.alpha == 0);
+   
+    if (isExistSotrItemView) {
         self.sortItemView.alpha = 1;
         self.sortItemView.itemView.alpha = 1;
     }
     else{
-    
-        GYSortItemView *sortItemView = [[GYSortItemView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButton, GYSegmentHeight)];
-     
-        self.sortItemView = sortItemView;
-        self.sortItemView.currentItemsArray = self.titleArray;
-        self.sortItemView.itemView.height = self.height;
+        GYSortItemView *sortItemView = [[GYSortItemView alloc]initWithFrame:CGRectMake(0, 70, self.width - GYaddButtonWidth, GYSegmentViewHeight)];
+        
+        _sortItemView = sortItemView;
+        _sortItemView.currentItemsArray = self.titleArray;
+        _sortItemView.itemView.height = self.height;
         __weak typeof(self) WeakSelf = self;
-        self.sortItemView.itemClickBlock = ^(UIButton *btn)
+        _sortItemView.itemClickBlock = ^(UIButton *btn)
         {
             [WeakSelf itemViewButtonClick:btn];
-        
-        
+            
+            
         };
         
-        [self addSubview:self.sortItemView];
-        [self addSubview:self.sortItemView.itemView];
+        [self addSubview:_sortItemView];
+        [self addSubview:_sortItemView.itemView];
     }
 
     
@@ -314,7 +311,7 @@ iCarouselDataSource>
     view = nil;
     
     
-    if (view == nil)
+    if (!view)
     {
         view = [[UIView alloc] initWithFrame:carousel.bounds];
         GYNewsTableView *tv = [[GYNewsTableView alloc]initWithFrame:CGRectMake(0, 0, carousel.width, carousel.height)];
@@ -412,7 +409,7 @@ iCarouselDataSource>
     
 }
 
-- (void)changeFontAndColor:(UIButton *)btn:(CGFloat)p
+- (void)changeFontAndColor:(UIButton *)button:(CGFloat)p
 {
     
     RGBA rgba1 = RGBAFromUIColor(GYTitleNormalColor);
@@ -430,16 +427,16 @@ iCarouselDataSource>
     CGFloat redTemp2 = ((red2 - red1) * p) + red1;
     CGFloat greenTemp2 = ((green2 - green1) * p) + green1;
     CGFloat blueTemp2 = ((blue2 - blue1) * p) + blue1;
-    if (btn == self.selectedButton) {
-        [btn setTitleColor:[UIColor colorWithRed:redTemp1 green:greenTemp1 blue:blueTemp1 alpha:1] forState:UIControlStateNormal];
+    if (button == self.selectedButton) {
+        [button setTitleColor:[UIColor colorWithRed:redTemp1 green:greenTemp1 blue:blueTemp1 alpha:1] forState:UIControlStateNormal];
         CGFloat font = GYTitleButtonMaxFont - p * (GYTitleButtonMaxFont - GYTitleButtonMinFont);
-        btn.titleLabel.font = [UIFont systemFontOfSize:font];
+        button.titleLabel.font = [UIFont systemFontOfSize:font];
     }
     else{
         CGFloat font = GYTitleButtonMinFont + p *(GYTitleButtonMaxFont -GYTitleButtonMinFont);
-        btn.titleLabel.font = [UIFont systemFontOfSize:font];
-        self.selectedButton = btn;
-        [btn setTitleColor:[UIColor colorWithRed:redTemp2 green:greenTemp2 blue:blueTemp2 alpha:1] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:font];
+        self.selectedButton = button;
+        [button setTitleColor:[UIColor colorWithRed:redTemp2 green:greenTemp2 blue:blueTemp2 alpha:1] forState:UIControlStateNormal];
     }
 }
 #pragma mark - 其他方法

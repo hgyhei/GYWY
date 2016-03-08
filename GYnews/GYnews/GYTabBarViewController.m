@@ -97,6 +97,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+   [super viewWillAppear:animated];
     UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 20)];
     
     statusBarView.backgroundColor=[UIColor redColor];

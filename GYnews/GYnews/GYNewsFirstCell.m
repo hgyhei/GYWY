@@ -11,7 +11,7 @@
 @implementation GYNewsFirstCell
 
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)setup{
+- (void)setup{
 
  
     // 设置约束
@@ -55,7 +55,7 @@
 }
 
 
--(void)setNewsModel:(GYNewsCellModel *)newsModel{
+- (void)setNewsModel:(GYNewsCellModel *)newsModel{
 
     self.lblTitle.text = newsModel.title;
     self.lblSubtitle.text = [NSString stringWithFormat:@"%@",newsModel.digest];

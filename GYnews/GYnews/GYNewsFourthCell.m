@@ -10,7 +10,7 @@
 
 @implementation GYNewsFourthCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -21,7 +21,7 @@
 }
 
 
--(void)setup{
+- (void)setup{
     // 滚动图片区
     self.cycleScrollView = [[SDCycleScrollView alloc] init];
     [self.contentView addSubview:self.cycleScrollView];
@@ -40,7 +40,7 @@
 
 }
 
--(void)setNewsModel:(GYNewsCellModel *)newsModel{
+- (void)setNewsModel:(GYNewsCellModel *)newsModel{
 
     // 获取滚动图片区数据
     NSMutableArray * imagesURLStrings = [NSMutableArray array];

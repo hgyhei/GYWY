@@ -13,7 +13,7 @@
 @implementation GYNewsBaseCell
 
 // 获取数据类型对应的cell
-+(NSString *)cellIdentifierForRow:(GYNewsCellModel *)newsModel{
++ (NSString *)cellIdentifierForRow:(GYNewsCellModel *)newsModel{
 
     if (newsModel.hasHead && newsModel.photosetID&&newsModel.ads){
         return @"GYNewsFourthCell";
@@ -27,32 +27,32 @@
  
 }
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.imgIcon = [UIImageView new];
-        [self.contentView addSubview:self.imgIcon];
+        _imgIcon = [UIImageView new];
+        [self.contentView addSubview:_imgIcon];
         
-        self.lblTitle = [UILabel new];
-        self.lblTitle.font = [UIFont systemFontOfSize:15];
-        [self.contentView addSubview:self.lblTitle];
+        _lblTitle = [UILabel new];
+        _lblTitle.font = [UIFont systemFontOfSize:15];
+        [self.contentView addSubview:_lblTitle];
         
-        self.lblSubtitle = [UILabel new];
-        self.lblSubtitle.textColor = [UIColor grayColor];
-        self.lblSubtitle.font = [UIFont systemFontOfSize:13];
-        [self.contentView addSubview:self.lblSubtitle];
+        _lblSubtitle = [UILabel new];
+        _lblSubtitle.textColor = [UIColor grayColor];
+        _lblSubtitle.font = [UIFont systemFontOfSize:13];
+        [self.contentView addSubview:_lblSubtitle];
         
-        self.lineView = [UIView new];
-        self.lineView.backgroundColor = rgba(238, 238, 238, 1.0);
-        [self.contentView addSubview:self.lineView];
+        _lineView = [UIView new];
+        _lineView.backgroundColor = rgba(238, 238, 238, 1.0);
+        [self.contentView addSubview:_lineView];
         
-        self.imgOther1 = [UIImageView new];
-        [self.contentView addSubview:self.imgOther1];
+        _imgOther1 = [UIImageView new];
+        [self.contentView addSubview:_imgOther1];
 
-        self.imgOther2 = [UIImageView new];
-        [self.contentView addSubview:self.imgOther2];
+        _imgOther2 = [UIImageView new];
+        [self.contentView addSubview:_imgOther2];
         
          
     }

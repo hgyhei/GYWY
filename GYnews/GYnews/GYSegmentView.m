@@ -5,11 +5,10 @@
 //  Created by hgy on 16/2/28.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define GYSegmentMargin 10
-#define GYLastTitleWidth 20
+
 #import "GYSegmentView.h"
 #import "UIView+Extension.h"
-
+#import "Constants.h"
 @interface GYSegmentView()
 
 @end
@@ -62,16 +61,16 @@
 
 - (void)setup
 {
-    UIScrollView *sc = [[UIScrollView alloc]initWithFrame:CGRectMake(GYSegmentMargin, 0, self.width - 2 * GYSegmentMargin, self.height)];
+    UIScrollView *sc = [[UIScrollView alloc]initWithFrame:CGRectMake(GYSegmentViewMargin, 0, self.width - 2 * GYSegmentViewMargin, self.height)];
     sc.backgroundColor = [UIColor whiteColor];
     sc.showsHorizontalScrollIndicator = NO;
     self.titleScroll = sc;
     [self addSubview:self.titleScroll];
     
-    UIView *cover1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GYSegmentMargin * 2, self.height)];
+    UIView *cover1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, GYSegmentViewMargin * 2, self.height)];
     cover1.backgroundColor = [UIColor whiteColor];
     cover1.alpha = 0.5;
-    UIView *cover2 = [[UIView alloc]initWithFrame:CGRectMake(self.width - 2 * GYSegmentMargin, 0, GYSegmentMargin * 2, self.height)];
+    UIView *cover2 = [[UIView alloc]initWithFrame:CGRectMake(self.width - 2 * GYSegmentViewMargin, 0, GYSegmentViewMargin * 2, self.height)];
     cover2.backgroundColor = [UIColor whiteColor];
     cover2.alpha = 0.5;
     [self addSubview:cover1];
@@ -84,7 +83,7 @@
 - (void)setupTitleButton
 {
     CGFloat btnHeight = self.height;
-    CGFloat btnX = GYSegmentMargin;
+    CGFloat btnX = GYSegmentViewMargin;
     CGFloat btnY = 0;
 
     NSMutableArray *array = [NSMutableArray array];
@@ -96,7 +95,7 @@
     {
         NSString *title = _titleArray[i];
         
-        CGFloat btnWidth = title.length * GYTitleButtonMaxFont + GYSegmentMargin;
+        CGFloat btnWidth = title.length * GYTitleButtonMaxFont + GYSegmentViewMargin;
         
         UIButton *btn = [[UIButton alloc]init];
         [btn  setTitle:title forState:UIControlStateNormal];
@@ -105,7 +104,7 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:GYTitleButtonMinFont];
         btn.frame = CGRectMake(btnX, btnY, btnWidth, btnHeight);
         [btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
-        btnX += btnWidth + GYSegmentMargin;
+        btnX += btnWidth + GYSegmentViewMargin;
         btn.tag = i;
       
         [array addObject:btn];

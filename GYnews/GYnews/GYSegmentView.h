@@ -5,8 +5,7 @@
 //  Created by hgy on 16/2/28.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define GYTitleButtonMaxFont 20
-#define GYTitleButtonMinFont 15
+
 #import <UIKit/UIKit.h>
 typedef void (^TitlebtnClickBlock)(UIButton *btn);
 @interface GYSegmentView : UIView

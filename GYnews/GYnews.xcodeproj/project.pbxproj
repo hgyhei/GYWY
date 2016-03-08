@@ -59,6 +59,7 @@
 		85C5D04A1C885ED100959B13 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C5D0421C885ED100959B13 /* SDCycleScrollView.m */; settings = {ASSET_TAGS = (); }; };
 		85C5D04B1C885ED100959B13 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C5D0441C885ED100959B13 /* UIView+SDExtension.m */; settings = {ASSET_TAGS = (); }; };
 		85FD040F1C892D3A0099872E /* circle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 85FD040E1C892D3A0099872E /* circle.gif */; settings = {ASSET_TAGS = (); }; };
+		85FDBD5C1C8EB2F400D0EB07 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FDBD5B1C8EB2F400D0EB07 /* Constants.m */; settings = {ASSET_TAGS = (); }; };
 		AE752ABDEB314BB8D213C114 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A35B859694C2508170E1542 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,8 @@
 		85C5D0431C885ED100959B13 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		85C5D0441C885ED100959B13 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		85FD040E1C892D3A0099872E /* circle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = circle.gif; path = ../../../../../Downloads/circle.gif; sourceTree = "<group>"; };
+		85FDBD5A1C8EB2F400D0EB07 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		85FDBD5B1C8EB2F400D0EB07 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		99D327A9CEB17E06D054791E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -340,6 +343,8 @@
 				85FD040E1C892D3A0099872E /* circle.gif */,
 				8562B6721C885BD500C3E703 /* AppDelegate.h */,
 				8562B6731C885BD500C3E703 /* AppDelegate.m */,
+				85FDBD5A1C8EB2F400D0EB07 /* Constants.h */,
+				85FDBD5B1C8EB2F400D0EB07 /* Constants.m */,
 			);
 			name = other;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				8562B6F01C885C5600C3E703 /* GYProfileHeaderView.m in Sources */,
 				8562B6E61C885C5600C3E703 /* GYNewsDetailViewController.m in Sources */,
 				8562B6F31C885C5600C3E703 /* GYProfileTopView.m in Sources */,
+				85FDBD5C1C8EB2F400D0EB07 /* Constants.m in Sources */,
 				8562B6F11C885C5600C3E703 /* GYProfileItem.m in Sources */,
 				8562B6ED1C885C5600C3E703 /* GYProfileBasicViewController.m in Sources */,
 				8562B7051C885C6600C3E703 /* GYTitleArrayManager.m in Sources */,

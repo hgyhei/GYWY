@@ -5,7 +5,8 @@
 //  Created by hgy on 16/2/26.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
-#define tablecellClick        @"tablecellClick"
+
+#import "Constants.h"
 #import "GYNewsTableView.h"
 #import "MJRefresh.h"
 #import "XYString.h"
@@ -125,12 +126,12 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     
     
     return self.listArry.count;
@@ -159,7 +160,7 @@
 {
     GYNewsCellModel * newsModel = self.listArry[indexPath.row];
     NSLog(@"didSelectRowAtIndexPath");
-    [[NSNotificationCenter defaultCenter] postNotificationName:tablecellClick object:newsModel];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GYNewsTablecellClickNotification object:newsModel];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {     GYNewsCellModel * newsModel = self.listArry[indexPath.row];

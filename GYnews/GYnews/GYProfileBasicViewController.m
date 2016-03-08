@@ -17,21 +17,21 @@
 @implementation GYProfileBasicViewController
 
 
--(instancetype)init{
+- (instancetype)init{
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
        
     }
     
     return self;
 }
--(NSMutableArray *)cellData{
+- (NSMutableArray *)cellData{
     if (!_cellData) {
         _cellData = [NSMutableArray array];
     }
     
     return _cellData;
 }
--(void)viewDidLoad{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
 //    

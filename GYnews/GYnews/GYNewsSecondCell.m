@@ -11,7 +11,7 @@
 @implementation GYNewsSecondCell
 
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -21,7 +21,7 @@
     return self;
 }
 
--(void)setup{
+- (void)setup{
     
     // 设置约束
     CGFloat margin = 10;
@@ -62,7 +62,7 @@
 
 }
 
--(void)setNewsModel:(GYNewsCellModel *)newsModel{
+- (void)setNewsModel:(GYNewsCellModel *)newsModel{
 
     
     [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:newsModel.imgsrc] placeholderImage:[UIImage imageNamed:@"303"]];
