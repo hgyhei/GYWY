@@ -9,7 +9,7 @@
 
 
 
-> ## GYNewsCarouselView中给GYNewsCarouselView提供标题数据
+> ## GYNewsViewController中给GYNewsCarouselView提供标题数据
 > 
 > 这里直接用了Plist文件来提供标题的text和urlstring
 > 
