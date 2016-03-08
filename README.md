@@ -9,11 +9,14 @@
 
 
 
+> ## GYNewsCarouselView中给GYNewsCarouselView提供标题数据
+> 
+> 这里直接用了Plist文件来提供标题的text和urlstring
 > 
 > 
->  GYNewsCarouselView *carousel = [[GYNewsCarouselView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
-    carousel.titleList = self.titleList;
-    [self.view addSubview:carousel];
->
+> ：
 > 
-
+>   GYNewsTableView *tv = [[GYNewsTableView alloc]initWithFrame:CGRectMake(0, 0, carousel.width, carousel.height)];
+       
+        
+        tv.title = self.tempListArray[index];
