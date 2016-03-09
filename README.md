@@ -13,10 +13,6 @@
 > 
 > 这里直接用了Plist文件来提供标题的text和urlstring
 > 
-> 
-> ：
-> 
->   GYNewsTableView *tv = [[GYNewsTableView alloc]initWithFrame:CGRectMake(0, 0, carousel.width, carousel.height)];
-       
-        
+
+GYNewsTableView *tv = [[GYNewsTableView alloc]initWithFrame:CGRectMake(0, 0, carousel.width, carousel.height)];
         tv.title = self.tempListArray[index];
