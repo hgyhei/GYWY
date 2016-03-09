@@ -2,7 +2,7 @@
 //  main.m
 //  GYnews
 //
-//  Created by tarena on 16/3/3.
+//  Created by hgy on 16/3/3.
 //  Copyright © 2016年 hgy. All rights reserved.
 //
 
