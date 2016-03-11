@@ -72,7 +72,7 @@
         myRefreshView = self.mj_header;
         //..上拉刷新
         self.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            page = page + 10;
+            page = page + 5;
             myRefreshView = self.mj_footer;
             [self loadData];
         }];
@@ -91,37 +91,38 @@
     _title = title;
 }
 - (void)loadData{
-    
-    NSString * urlString = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/%@/%ld-10.html",self.title,page];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *dict = [XYString getObjectFromJsonString:operation.responseString];
-        
-        NSString *key = [dict.keyEnumerator nextObject];//.取键值
-        
-        NSArray *temArray = dict[key];
-        
-        // 数组>>model数组
-        NSMutableArray *arrayM = [NSMutableArray arrayWithArray:[GYNewsCellModel mj_objectArrayWithKeyValuesArray:temArray]];
-        
-        if (myRefreshView == self.mj_header) {
-            self.listArry = arrayM;
-            self.mj_footer.hidden = self.listArry.count==0?YES:NO;
+    if (!_listArry) {
+        NSString * urlString = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/%@/%ld-10.html",self.title,page];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [manager GET:urlString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             
-        }else if(myRefreshView == self.mj_footer){
-            [self.listArry addObjectsFromArray:arrayM];
-        }
-        
-        [self reloadData];
-        [myRefreshView endRefreshing];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+     
+            NSString *key = [dict.keyEnumerator nextObject];//.取键值
+            
+            NSArray *temArray = dict[key];
 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSMutableArray *arrayM = [NSMutableArray arrayWithArray:[GYNewsCellModel mj_objectArrayWithKeyValuesArray:temArray]];
+            
+            if (myRefreshView == self.mj_header) {
+                self.listArry = arrayM;
+                self.mj_footer.hidden = self.listArry.count==0?YES:NO;
+                
+            }else if(myRefreshView == self.mj_footer){
+                [self.listArry addObjectsFromArray:arrayM];
+            }
+            
+            [self reloadData];
+            [myRefreshView endRefreshing];
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"%@",error);
+            [myRefreshView endRefreshing];
+        }];
         
-        NSLog(@"请求失败");
-        [myRefreshView endRefreshing];
-    }];
+
+    }
     
 }
 

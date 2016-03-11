@@ -33,12 +33,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-NSMutableString *js = [NSMutableString string];
-    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML;"];
-    NSLog(@"%@", html);
-    [js appendString:@"var top = document.getElementsByClassName('topbar)"];
-    [js appendString:@"top.parentNode.removeChild(top);"];
-        [webView stringByEvaluatingJavaScriptFromString:js];
+//NSMutableString *js = [NSMutableString string];
+//    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML;"];
+//    NSLog(@"%@", html);
+//    [js appendString:@"var top = document.getElementsByClassName('topbar)"];
+//    [js appendString:@"top.parentNode.removeChild(top);"];
+//        [webView stringByEvaluatingJavaScriptFromString:js];
 
 }
 
